@@ -1,0 +1,14 @@
+runner:
+  timezone: Asia/Tokyo
+
+jobs:
+  hello:
+    schedule:
+      cron: "*/5 * * * *"
+    run: echo "Hello from rollcron!"
+
+  auto-moderator:
+    schedule:
+      cron: "0 12 * * *"
+    run: bun install && bun start
+    working_dir: bots/auto-moderator

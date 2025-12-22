@@ -1,0 +1,20 @@
+{
+  "name": "auto-moderator",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "bun run src/main.ts",
+    "ci": "bun types && bun check",
+    "types": "bun run tsc",
+    "check": "biome check"
+  },
+  "dependencies": {
+    "valibot": "^1.1.0"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.2.4",
+    "@types/bun": "^1.2.22",
+    "typescript": "^5.9.2"
+  }
+}

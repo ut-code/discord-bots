@@ -1,0 +1,6 @@
+# commonly ignored files
+node_modules
+.direnv
+.devenv
+.env
+.envrc.local

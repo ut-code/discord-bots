@@ -1,0 +1,13 @@
+# Lefthook: Precommit Hook
+# docs: https://github.com/evilmartians/lefthook/blob/master/docs/configuration.md
+# 必須: Lefthook
+# 必須: `lefthook install`
+pre-commit:
+  parallel: true
+  commands:
+    biome:
+      glob: "*"
+      run: biome check --write --no-errors-on-unmatched --files-ignore-unknown=true -- {staged_files}
+      stage_fixed: true
+    type-check:
+      run: bunx tsc
