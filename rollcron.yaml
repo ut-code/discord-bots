@@ -2,22 +2,26 @@ runner:
   timezone: Asia/Tokyo
 
 jobs:
-  hello:
-    schedule:
-      cron: "*/5 * * * *"
-    run: echo "Hello from rollcron!"
-
   auto-moderator:
     schedule:
       cron: "0 12 * * *"
-    run: bun install && bun start
     working_dir: bots/auto-moderator
+    run: ENV_FILE=~/variables/discord-bots/auto-moderator.env run.sh
+
+  gsc-report:
+    schedule:
+      cron: "0 7 * * 0"
+    working_dir: bots/gsc-report
+    run: ENV_FILE=~/variables/discord-bots/gsc-report.env run.sh
 
   asakatsu-bot-ask:
     schedule:
       cron: "0 19 * * *"
+    working_dir: bots/asakatsu-bot
     run: ENV_FILE=~/variables/discord-bots/asakatsu-bot.env run.sh ask
+
   asakatsu-bot-check:
     schedule:
       cron: "0 8 * * *"
+    working_dir: bots/asakatsu-bot
     run: ENV_FILE=~/variables/discord-bots/asakatsu-bot.env run.sh check
