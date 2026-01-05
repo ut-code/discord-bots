@@ -12,3 +12,12 @@ jobs:
       cron: "0 12 * * *"
     run: bun install && bun start
     working_dir: bots/auto-moderator
+
+  asakatsu-bot-ask:
+    schedule:
+      cron: "0 19 * * *"
+    run: run.sh ask
+  asakatsu-bot-check:
+    schedule:
+      cron: "0 8 * * *"
+    run: run.sh check
