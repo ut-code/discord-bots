@@ -16,8 +16,8 @@ jobs:
   asakatsu-bot-ask:
     schedule:
       cron: "0 19 * * *"
-    run: run.sh ask
+    run: ENV_FILE=~/variables/discord-bots/asakatsu-bot.env run.sh ask
   asakatsu-bot-check:
     schedule:
       cron: "0 8 * * *"
-    run: run.sh check
+    run: ENV_FILE=~/variables/discord-bots/asakatsu-bot.env run.sh check

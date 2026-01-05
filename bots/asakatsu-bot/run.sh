@@ -1,24 +1,25 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+ENV_FILE="${ENV_FILE:-.env}"
 function bail() {
 	echo "$@"
 	exit 1
 }
 
 # prerequesties
-if [ ! -f .env ]; then
+if [ ! -f "$ENV_FILE" ]; then
 	bail "Prerequesties not met: .env not found"
 fi
 
 case "$1" in
 ask)
 	bun install --frozen-lockfile
-	bun --env-file=.env commands/ask.ts
+	bun --env-file="$ENV_FILE" commands/ask.ts
 	;;
 check)
 	bun install --frozen-lockfile
-	bun --env-file=.env commands/check.ts
+	bun --env-file="$ENV_FILE" commands/check.ts
 	;;
 *)
 	bail "[asakatsu-bot] Unknown Command: $1"
