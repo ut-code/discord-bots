@@ -47,7 +47,11 @@ async function getSearchPerformance() {
 }
 
 async function sendToDiscord(data) {
-  const webhook = new WebhookClient({ url: process.env.WEBHOOK_URL });
+  const url = process.env.WEBHOOK_URL;
+  if (!url) {
+    throw new Error('WEBHOOK_URL environment variable is not set');
+  }
+  const webhook = new WebhookClient({ url });
 
   const fields = Object.entries(data)
     .filter(([sub, stats]) => stats.clicks > 0)
