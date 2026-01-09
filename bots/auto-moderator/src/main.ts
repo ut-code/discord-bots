@@ -9,8 +9,7 @@ https://developers.notion.com/docs/working-with-databases
 */
 
 // the url is safe to publish.
-const NOTION_TASK_PAGE_URL =
-  "https://www.notion.so/utcode/e8d7215fb5224be4a9a3e7d3be4d41ff";
+const NOTION_TASK_PAGE_URL = "https://www.notion.so/utcode/e8d7215fb5224be4a9a3e7d3be4d41ff";
 const DAY = 24 * 60 * 60 * 1000;
 
 const query = {
@@ -19,9 +18,7 @@ const query = {
       {
         property: "期日",
         date: {
-          before: new Date(Date.now() + 3 * DAY)
-            .toISOString()
-            .match(/^\d{4}-\d{2}-\d{2}/)?.[0],
+          before: new Date(Date.now() + 3 * DAY).toISOString().match(/^\d{4}-\d{2}-\d{2}/)?.[0],
         },
       },
       {
@@ -46,9 +43,7 @@ interface FormatTaskReturn {
 }
 function formatTask(task: Task): FormatTaskReturn {
   const due = task.properties.期日?.date.start;
-  const title = task.properties.タイトル?.title
-    .map((title) => title.plain_text)
-    .join("");
+  const title = task.properties.タイトル?.title.map((title) => title.plain_text).join("");
 
   const unregistered: { id: string; name?: string }[] = [];
 
@@ -72,9 +67,7 @@ function formatTask(task: Task): FormatTaskReturn {
   });
 
   const assignee = assignees?.join(" ");
-  const formatted = assignee
-    ? `・【${due}】${title} ${assignee}`
-    : `・【${due}】${title} (担当者不在)`;
+  const formatted = assignee ? `・【${due}】${title} ${assignee}` : `・【${due}】${title} (担当者不在)`;
 
   return { formatted, unregistered };
 }
@@ -84,13 +77,10 @@ async function main() {
   const json = v.parse(NotionFetchResponse, await res.json());
   const taskResults = json.results.map(formatTask);
 
-  if (taskResults.length === 0)
-    return "本日は期限が迫っているタスクはありませんでした。";
+  if (taskResults.length === 0) return "本日は期限が迫っているタスクはありませんでした。";
 
   const tasks = taskResults.map((t) => t.formatted);
-  const allUnregistered = [
-    ...new Set(taskResults.flatMap((t) => t.unregistered)),
-  ];
+  const allUnregistered = [...new Set(taskResults.flatMap((t) => t.unregistered))];
 
   let message = `
 3日以内に期限が迫っているタスクがあります！

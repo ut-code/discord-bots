@@ -5,10 +5,7 @@ export function env(name: string) {
 }
 
 // should not throw
-export async function retry(
-  count: number,
-  func: () => Promise<string>
-): Promise<string | Error> {
+export async function retry(count: number, func: () => Promise<string>): Promise<string | Error> {
   let err: Error = new Error("失敗していません");
   for (const _ of new Array(count).fill(0)) {
     try {
@@ -31,16 +28,13 @@ export async function webhook(message: string) {
 }
 
 export async function queryNotion(query: object) {
-  return await fetch(
-    "https://api.notion.com/v1/databases/e8d7215f-b522-4be4-a9a3-e7d3be4d41ff/query",
-    {
-      method: "POST",
-      headers: {
-        "Notion-Version": "2022-06-28",
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${env("NOTION_API_KEY")}`,
-      },
-      body: JSON.stringify(query),
-    }
-  );
+  return await fetch("https://api.notion.com/v1/databases/e8d7215f-b522-4be4-a9a3-e7d3be4d41ff/query", {
+    method: "POST",
+    headers: {
+      "Notion-Version": "2022-06-28",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${env("NOTION_API_KEY")}`,
+    },
+    body: JSON.stringify(query),
+  });
 }
