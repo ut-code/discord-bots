@@ -7,25 +7,29 @@ jobs:
       cron: "0 12 * * *"
     working_dir: bots/auto-moderator
     run: ./run.sh
-    env_file: ~/run/discord-bots/auto-moderator.env
+    env_file: ~/run/discord-bots/auto-moderator/env
+    log_file: ~/run/discord-bots/auto-moderator/log
 
   gsc-report:
     schedule:
       cron: "0 0 7 * * 7"
     working_dir: bots/gsc-report
     run: ./run.sh
-    env_file: ~/run/discord-bots/gsc-report.env
+    env_file: ~/run/discord-bots/gsc-report/env
+    log_file: ~/run/discord-bots/gsc-report/log
 
   asakatsu-bot-ask:
     schedule:
       cron: "0 19 * * *"
     working_dir: bots/asakatsu-bot
     run: ./run.sh ask
-    env_file: ~/run/discord-bots/asakatsu-bot.env
+    env_file: ~/run/discord-bots/asakatsu-bot/env
+    log_file: ~/run/discord-bots/asakatsu-bot/log
 
   asakatsu-bot-check:
     schedule:
       cron: "0 8 * * *"
     working_dir: bots/asakatsu-bot
     run: ./run.sh check
-    env_file: ~/run/discord-bots/asakatsu-bot.env
+    env_file: ~/run/discord-bots/asakatsu-bot/env
+    log_file: ~/run/discord-bots/asakatsu-bot/log
