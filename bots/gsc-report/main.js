@@ -1,8 +1,7 @@
 const { google } = require("googleapis");
 const { WebhookClient } = require("discord.js");
 const dayjs = require("dayjs");
-const dotenv = require("dotenv");
-dotenv.config({ path: process.env.ENV_FILE });
+require("dotenv").config();
 
 const auth = new google.auth.GoogleAuth({
   scopes: ["https://www.googleapis.com/auth/webmasters.readonly"],
