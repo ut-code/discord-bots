@@ -12,7 +12,7 @@ jobs:
 
   gsc-report:
     schedule:
-      cron: "0 0 7 * * 7"
+      cron: "0 7 * * 7"
     working_dir: bots/gsc-report
     run: ./run.sh
     env_file: ~/run/discord-bots/gsc-report/env
