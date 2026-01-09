@@ -1,5 +1,6 @@
 import * as v from "valibot";
 import { idMap, nameMap, type UUID } from "./data.ts";
+import { env } from "./env.ts";
 import { queryNotion, retry, webhook } from "./io.ts";
 import { NotionFetchResponse, type Task } from "./validator.ts";
 
@@ -47,9 +48,11 @@ function formatTask(task: Task): FormatTaskReturn {
 
   const unregistered: { id: string; name?: string }[] = [];
 
+  const mention = (id: string) => (env.DISABLE_MENTION ? `@${id}` : `<@${id}>`);
+
   const assignees = task.properties.担当者?.people.map((person) => {
     const discordIdFromId = idMap.get(person.id satisfies string as UUID);
-    if (discordIdFromId) return `<@${discordIdFromId}>`;
+    if (discordIdFromId) return mention(discordIdFromId);
 
     if (!unregistered.some((u) => u.id === person.id)) {
       unregistered.push({ name: person.name, id: person.id });
@@ -58,7 +61,7 @@ function formatTask(task: Task): FormatTaskReturn {
     if (person.name) {
       const discordIdFromName = nameMap.get(person.name);
       if (discordIdFromName) {
-        return `<@${discordIdFromName}>`;
+        return mention(discordIdFromName);
       } else {
         return `@${person.name}`;
       }

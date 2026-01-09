@@ -1,9 +1,15 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-bun install --frozen-lockfile || {
-	echo 'auto-moderator: Failed to bun install --frozen-lockfile. falling back to bun install...' 2>&1
-	bun install
+function bail() {
+	echo "$@"
+	exit 1
 }
 
-bun start
+ENV_FILE="${ENV_FILE:-.env}"
+if [ ! -f "$ENV_FILE" ]; then
+	bail "Prerequesties not met: .env not found"
+fi
+
+bun install --frozen-lockfile
+bun --env-file="$ENV_FILE" start

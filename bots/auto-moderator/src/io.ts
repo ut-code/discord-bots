@@ -1,8 +1,4 @@
-export function env(name: string) {
-  const e = process.env[name];
-  if (!e) throw new Error(`Environment variable not found for ${name}`);
-  return e;
-}
+import { env } from "./env.ts";
 
 // should not throw
 export async function retry(count: number, func: () => Promise<string>): Promise<string | Error> {
@@ -19,8 +15,7 @@ export async function retry(count: number, func: () => Promise<string>): Promise
 }
 
 export async function webhook(message: string) {
-  const url = env("DISCORD_WEBHOOK_URL");
-  await fetch(url, {
+  await fetch(env.DISCORD_WEBHOOK_URL, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ content: message }),
@@ -33,7 +28,7 @@ export async function queryNotion(query: object) {
     headers: {
       "Notion-Version": "2022-06-28",
       "Content-Type": "application/json",
-      Authorization: `Bearer ${env("NOTION_API_KEY")}`,
+      Authorization: `Bearer ${env.NOTION_API_KEY}`,
     },
     body: JSON.stringify(query),
   });
