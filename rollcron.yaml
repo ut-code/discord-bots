@@ -1,5 +1,9 @@
 runner:
   timezone: Asia/Tokyo
+  env_file: ~/run/discord-bots/runner.env
+  webhook:
+    - type: discord
+      url: $DISCORD_WEBHOOK_URL
 
 jobs:
   auto-moderator:
