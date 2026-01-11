@@ -1,4 +1,4 @@
-import { Client, type SendableChannels } from "discord.js";
+import type { Client, SendableChannels } from "discord.js";
 
 import { z } from "zod";
 

@@ -53,15 +53,15 @@ async function sendToDiscord(data) {
   const webhook = new WebhookClient({ url });
 
   const fields = Object.entries(data)
-    .filter(([sub, stats]) => stats.clicks > 0)
-    .sort(([sub1, stats1], [sub2, stats2]) => stats2.clicks - stats1.clicks)
+    .filter(([_sub, stats]) => stats.clicks > 0)
+    .sort(([_sub1, stats1], [_sub2, stats2]) => stats2.clicks - stats1.clicks)
     .slice(0, 10)
     .map(([sub, stats], i) => {
       let name;
       if (sub.startsWith("kf")) {
-        name = `${sub} (駒場祭${2000 + parseInt(sub.slice(2)) - 51})`;
+        name = `${sub} (駒場祭${2000 + parseInt(sub.slice(2), 10) - 51})`;
       } else if (sub.startsWith("mf")) {
-        name = `${sub} (五月祭${2000 + parseInt(sub.slice(2)) - 73})`;
+        name = `${sub} (五月祭${2000 + parseInt(sub.slice(2), 10) - 73})`;
       } else if (channelIds[sub]) {
         name = `${sub} ${channelIds[sub]}`;
       } else {

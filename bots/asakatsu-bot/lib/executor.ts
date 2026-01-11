@@ -1,5 +1,5 @@
 import { Client, GatewayIntentBits, Partials } from "discord.js";
-import { Env, type Context } from "./types";
+import { type Context, Env } from "./types";
 
 export async function execWithContext(fn: (c: Context) => Promise<void>) {
   const env = Env.parse(process.env);

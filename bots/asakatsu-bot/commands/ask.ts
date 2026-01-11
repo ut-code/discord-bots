@@ -1,5 +1,5 @@
 import { execWithContext } from "../lib/executor";
-import { REACTION, type Context } from "../lib/types";
+import { REACTION } from "../lib/types";
 
 await execWithContext(async (c) => {
   const poll = await c.channel.send(

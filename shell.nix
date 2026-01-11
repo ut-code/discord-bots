@@ -3,5 +3,6 @@ pkgs.mkShell {
   packages = [
     pkgs.bun
     pkgs.nodejs
+    pkgs.biome
   ];
 }
