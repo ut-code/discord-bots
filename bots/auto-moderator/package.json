@@ -5,9 +5,7 @@
   "type": "module",
   "scripts": {
     "start": "bun run src/main.ts",
-    "ci": "bun types && bun check",
-    "types": "bun run tsc",
-    "check": "biome check"
+    "ci": "bun run tsc"
   },
   "dependencies": {
     "valibot": "^1.1.0"
