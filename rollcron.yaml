@@ -37,3 +37,11 @@ jobs:
     run: ./run.sh check
     env_file: ~/run/discord-bots/asakatsu-bot/env
     log_file: ~/run/discord-bots/asakatsu-bot/log
+
+  joji-bot:
+    schedule:
+      cron: "0 19 * * *"
+    working_dir: bots/joji-bot
+    run: ./run.sh
+    env_file: ~/run/discord-bots/joji-bot/env
+    log_file: ~/run/discord-bots/joji-bot/log
