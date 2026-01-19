@@ -34,3 +34,10 @@ jobs:
     env_file: ~/run/discord-bots/asakatsu-bot/env
     log: ~/run/discord-bots/asakatsu-bot/log
 
+  joji-bot:
+    schedule: "7pm"
+    working_dir: bots/joji-bot
+    run: ./run.sh
+    env_file: ~/run/discord-bots/joji-bot/env
+    log: ~/run/discord-bots/joji-bot/log
+
