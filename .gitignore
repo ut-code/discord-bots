@@ -6,4 +6,3 @@ node_modules
 .envrc.local
 
 .sops-key-file
-last_video_id.txt
