@@ -1,9 +1,13 @@
 _:
-  deploy: &deploy age12n68j7wyf97vrw4jwr5x0gf2zdcumh65r9uq3mctsa6y9f8ex4yqm2gx06
-  aster-void: &aster-void age1mc8e35xaeteup9t88369j7y0ka08et8ezztqzc7dy0h4ecgxh47szjwx9v
+  age-public-keys:
+    - &deploy age12n68j7wyf97vrw4jwr5x0gf2zdcumh65r9uq3mctsa6y9f8ex4yqm2gx06
+    - &aster-void age1mc8e35xaeteup9t88369j7y0ka08et8ezztqzc7dy0h4ecgxh47szjwx9v
 
 creation_rules:
-  - path_regex: .*
+  - path_regex: bots/auto-moderator/sops2.env
+    age:
+      - *deploy
+  - path_regex: bots/auto-moderator/*
     age:
       - *deploy
       - *aster-void

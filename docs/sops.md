@@ -27,6 +27,14 @@ creation_rules:
 sops exec-env sops.env 'your-command'
 ```
 
+## 再暗号化
+
+`.sops.yaml`のキーを変更した後に実行:
+
+```bash
+sops updatekeys sops.env
+```
+
 ## 公開鍵を取得
 
 ```bash

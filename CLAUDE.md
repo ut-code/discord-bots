@@ -1,8 +1,14 @@
 - `sops -d` を実行しない。コマンドを実行する必要がある場合は `sops exec-env` で直接実行する
-- `.age-key` を読まない。
+- `.age-key` を読まない
 
 ## コマンド実行方法
 
 ```bash
 eval "$(direnv export bash)" && <command>
+```
+
+## SOPS検証方法
+
+```bash
+sops exec-env path/to/sops.env 'echo success!'
 ```
