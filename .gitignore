@@ -5,4 +5,4 @@ node_modules
 .env
 .envrc.local
 
-.sops-key-file
+.age-key

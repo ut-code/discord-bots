@@ -19,4 +19,4 @@ mkdir bots/YOUR_BOT
 
 ## デプロイ
 
-環境変数が必要な場合は VPS 上に run/discord-bots/YOUR_BOT/env に書いてください。SOPS などが必要な場合は自分で用意してください
+環境変数が必要な場合は [SOPS](docs/sops.md) で暗号化するか、VPS 上に run/discord-bots/YOUR_BOT/env に書いてください。

@@ -4,5 +4,7 @@ pkgs.mkShell {
     pkgs.bun
     pkgs.nodejs
     pkgs.biome
+    pkgs.sops
+    pkgs.age
   ];
 }
