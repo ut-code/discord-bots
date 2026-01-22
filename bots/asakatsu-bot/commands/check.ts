@@ -25,7 +25,7 @@ await execWithContext(async (ctx) => {
   const users = await reaction.users.fetch();
   const targets = users.filter((u) => !u.bot).map((u) => u.id);
   if (!targets.length) {
-    await ctx.channel.send("リアクションないの悲しいって")
+    await ctx.channel.send("リアクションないの悲しいって");
     console.log("OK: ユーザーのリアクション無し");
     return;
   }
