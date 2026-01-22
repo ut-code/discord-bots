@@ -1,22 +1,47 @@
 # Discord Bots
 
-## 開発
+## Bot を追加する
 
-特に記述することはなし
+### 1. `bots/` にフォルダを作る
 
-## Bot追加方法
+### 2. コードを書く
 
-1.
+### 3. `run.sh` を作る
 
-```sh
-mkdir bots/YOUR_BOT
+### 4. `rollcron.yaml` に追加
+
+```yaml
+my-bot:
+  schedule: "7pm"  # 下記参照
+  working_dir: bots/my-bot
+  run: ./run.sh
+  log: ~/run/discord-bots/my-bot/log
+  # build: ./build.sh  # コンパイルが必要な場合
+  # env_file: ~/run/discord-bots/my-bot/env  # 環境変数が必要な場合
 ```
 
-2. bots/YOUR_BOT にBotを書く
-3. `rollcron.yaml` に YOUR_BOT の cron スケジュールとスクリプトを書く。
-4. VPS にすでに実行環境がない場合は、実行環境を作る (Docker ランナーはそのうちサポートする予定)
-5. CODEOWNERS に追加する
+schedule の書き方:
 
-## デプロイ
+```
+"7pm"                   "8:30am"              "noon"
+"7pm every Monday"      "9am every weekday"   "midnight every Friday"
+"7am every Sunday"      "6pm every 3 days"    "noon every 2 weeks"
+"0 19 * * *"            "30 8 * * 1-5"        "0 0 1 * *"
+```
 
-環境変数が必要な場合は [SOPS](docs/sops.md) で暗号化するか、VPS 上に run/discord-bots/YOUR_BOT/env に書いてください。
+### 5. `CODEOWNERS` に追加
+
+```
+/bots/my-bot/ @your-github-username
+```
+
+### 6. 環境変数
+
+2通りの方法がある:
+
+```
+1. rollcron.yaml (env_file) → run.sh → program
+2. rollcron.yaml → run.sh → sops → program
+```
+
+SOPS を使う場合は [docs/sops.md](docs/sops.md) を参照。
