@@ -24,8 +24,8 @@ schedule の書き方:
 
 ```
 "7pm"                   "8:30am"              "noon"
-"7pm every Monday"      "9am every weekday"   "midnight every Friday"
-"7am every Sunday"      "6pm every 3 days"    "noon every 2 weeks"
+"7pm every Monday"      "midnight every Friday"
+"7am every Sunday"      "6pm every 3 days"
 "0 19 * * *"            "30 8 * * 1-5"        "0 0 1 * *"
 ```
 
