@@ -27,3 +27,11 @@ sops bots/my-bot/sops.env
 #!/bin/bash
 sops exec-env sops.env 'bun run index.ts'
 ```
+
+## その他のコマンド
+
+```bash
+sops -d sops.env              # 復号して表示
+sops updatekeys sops.env      # .sops.yaml の変更を反映
+age-keygen -y .age-key        # 公開鍵を表示
+```
