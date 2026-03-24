@@ -83,7 +83,9 @@ async function main() {
   if (taskResults.length === 0) return "本日は期限が迫っているタスクはありませんでした。";
 
   const tasks = taskResults.map((t) => t.formatted);
-  const allUnregistered = [...new Set(taskResults.flatMap((t) => t.unregistered))];
+  const allUnregistered = [
+    ...new Map(taskResults.flatMap((t) => t.unregistered).map((u) => [u.id, u])).values(),
+  ];
 
   let message = `
 3日以内に期限が迫っているタスクがあります！
