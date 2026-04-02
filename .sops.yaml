@@ -4,9 +4,6 @@ _:
     - &aster-void age1j647p0v0w4yjae97agk709smzjgyyl8ft4jp35hyh2ffeaj9wg9qfu3pe7
 
 creation_rules:
-  - path_regex: bots/auto-moderator/sops2.env
-    age:
-      - *deploy
   - path_regex: bots/auto-moderator/*
     age:
       - *deploy

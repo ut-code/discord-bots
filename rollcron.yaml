@@ -10,7 +10,6 @@ jobs:
     schedule: noon
     run: ./run.sh
     working_dir: bots/auto-moderator
-    env_file: ~/run/discord-bots/auto-moderator/env
     log: ~/run/discord-bots/auto-moderator/log
 
   gsc-report:
