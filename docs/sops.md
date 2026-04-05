@@ -74,20 +74,12 @@ sops updatekeys bots/my-bot/sops.env
 
 変更された `sops.env` をコミットする。
 
-## 復号できるか確認する (中身を見ずに)
-
-```bash
-sops exec-env bots/my-bot/sops.env 'echo ok'
-```
-
-`ok` が出れば鍵が正しい。値は表示されない。
-
 ## よく使うコマンド
 
 ```bash
 sops bots/my-bot/sops.env                       # 作成 or 編集
-sops exec-env bots/my-bot/sops.env 'echo ok'    # 復号チェック (中身非表示)
 sops -d bots/my-bot/sops.env                     # 復号して stdout に表示
+sops exec-env bots/my-bot/sops.env 'echo ok'    # 復号チェック (coding agent 向け)
 sops updatekeys bots/my-bot/sops.env             # .sops.yaml の変更を反映
 age-keygen -y .age-key                           # 自分の公開鍵を表示
 ```
