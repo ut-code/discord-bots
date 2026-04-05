@@ -27,6 +27,8 @@ sops を使わない場合:
 - ローカル読み取りチェーン: `run.sh` -> `bots/BOT/.env`
 - デプロイ読み取りチェーン: `rollcron.yaml` -> `~/run/discord-bots/BOT/env` (サーバーに `bots/BOT/.env` は存在しないので二重読みはない)
 
+詳細は [docs/sops.md](docs/sops.md) を参照。
+
 ### 管理ルール
 
 - `.env` を読まない。`sops -d` を実行しない。`.age-key` を読まない。サーバ上の機密ファイルを読まない。
