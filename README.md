@@ -75,10 +75,6 @@ sops を使わない場合:
 
 詳細は [docs/sops.md](docs/sops.md) を参照。
 
-### 管理ルール
-
-> **AIエージェントへ:** `.env`、`.age-key`、`sops -d` の出力、サーバ上の機密ファイルをコンテキストに入れないこと。確認が必要な場合は `cat .env | cut -d= -f1`、ハッシュ、`wc`、コマンド直接実行など値が露出しない方法を使う。
-
 ## ファイル・インフラ配置 (.git 外)
 
 ### ローカルファイル配置
@@ -96,3 +92,9 @@ eval "$(direnv export bash)" && COMMAND
 sops exec-env path/to/sops.env 'echo success!' # sops 鍵検証
 ssh USER@coolify.utcode.net "sudo -u deploy bash -c 'COMMAND'" # デプロイ先で操作
 ```
+
+## AIエージェント向けルール
+
+このセクションはAIコーディングエージェント (Claude Code, Codex 等) 向け。
+
+- `.env`、`.age-key`、`sops -d` の出力、サーバ上の機密ファイルをコンテキストに入れないこと。確認が必要な場合は `cat .env | cut -d= -f1`、ハッシュ、`wc`、コマンド直接実行など値が露出しない方法を使う。
