@@ -43,21 +43,15 @@ creation_rules:
 
 変更をコミット・プッシュしたら、既存の暗号化ファイルにリキーが必要 (後述)。
 
-## 暗号化ファイルを作成
+## 暗号化ファイルを作成・編集
 
 ```bash
-sops bots/my-bot/sops.env
+EDITOR="code --wait" sops bots/my-bot/sops.env  # VS Code
+EDITOR=nvim sops bots/my-bot/sops.env            # Neovim
 ```
 
-エディタが開くので `KEY=VALUE` 形式で書いて保存。自動で暗号化される。
-
-## 暗号化ファイルを編集
-
-```bash
-sops bots/my-bot/sops.env
-```
-
-作成と同じコマンド。既存ファイルならエディタで復号された状態が開き、保存時に再暗号化される。
+エディタで復号された状態が開き、保存・終了すると自動で暗号化される。  
+新規ファイルなら `KEY=VALUE` 形式で書く。`EDITOR` を省略すると `$EDITOR` or `vim` が使われる。
 
 ## Bot で使う
 
