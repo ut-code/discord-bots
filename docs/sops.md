@@ -1,37 +1,90 @@
-# SOPS セットアップ
+# SOPS ガイド
 
-環境変数を暗号化して Git に安全にコミットする。
+環境変数を [age](https://github.com/FiloSottile/age) で暗号化し、Git に安全にコミットする仕組み。
 
-## 初回セットアップ
+## 初回セットアップ (自分の鍵を作る)
+
+### age 鍵を生成
 
 ```bash
-# 1. 鍵を作成（公開鍵が表示される → コピー）
 age-keygen -o .age-key
-
-# 2. .sops.yaml に公開鍵を追加してコミット
+# Public key: age1xxxx... ← この公開鍵をコピー
 ```
 
-## 環境変数ファイルを作成
+`.age-key` は `.gitignore` 済み。ローカル復号に使う。
+
+### SSH 鍵を使う場合
+
+age 鍵の代わりに既存の SSH 鍵 (Ed25519/RSA) も使える。
+
+```bash
+# SSH 公開鍵から age 公開鍵を導出
+age-keygen -y /path/to/ssh/id_ed25519
+# age1xxxx...
+```
+
+復号時は `SOPS_AGE_KEY_FILE` の代わりに ssh-agent が使われる。  
+`.sops.yaml` には導出した age 公開鍵を登録する (手順は同じ)。
+
+## 公開鍵を `.sops.yaml` に追加
+
+```yaml
+_:
+  age-public-keys:
+    - &deploy age15uc7fh...    # サーバー
+    - &your-name age1xxxx...   # ← 追加
+
+creation_rules:
+  - path_regex: bots/my-bot/*
+    age:
+      - *deploy
+      - *your-name             # ← 復号できる人を列挙
+```
+
+変更をコミット・プッシュしたら、既存の暗号化ファイルにリキーが必要 (後述)。
+
+## 暗号化ファイルを作成
 
 ```bash
 sops bots/my-bot/sops.env
 ```
 
-エディタで環境変数を書いて保存。
+エディタが開くので `KEY=VALUE` 形式で書いて保存。自動で暗号化される。
+
+## 暗号化ファイルを編集
+
+```bash
+sops bots/my-bot/sops.env
+```
+
+作成と同じコマンド。既存ファイルならエディタで復号された状態が開き、保存時に再暗号化される。
 
 ## Bot で使う
 
-`run.sh`:
+`run.sh` で `sops exec-env` を使う:
 
 ```bash
 #!/bin/bash
 sops exec-env sops.env 'bun run index.ts'
 ```
 
-## その他のコマンド
+環境変数として復号された値がプロセスに渡される。ファイルに平文は残らない。
+
+## リキー (鍵の追加・削除を既存ファイルに反映)
+
+`.sops.yaml` を変更しただけでは既存ファイルには反映されない。`updatekeys` で反映する:
 
 ```bash
-sops -d sops.env              # 復号して表示
-sops updatekeys sops.env      # .sops.yaml の変更を反映
-age-keygen -y .age-key        # 公開鍵を表示
+sops updatekeys bots/my-bot/sops.env
+```
+
+変更された `sops.env` をコミットする。
+
+## よく使うコマンド
+
+```bash
+sops bots/my-bot/sops.env            # 作成 or 編集
+sops -d bots/my-bot/sops.env         # 復号して stdout に表示
+sops updatekeys bots/my-bot/sops.env  # .sops.yaml の変更を反映
+age-keygen -y .age-key                # 自分の公開鍵を表示
 ```
