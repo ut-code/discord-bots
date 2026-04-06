@@ -2,9 +2,11 @@ _:
   age-public-keys:
     - &deploy age15uc7fh9ypkxwnmwu9pzekrju4jv5atvcqklyacxv0325625gvsvqp8fvdl
     - &aster-void age1j647p0v0w4yjae97agk709smzjgyyl8ft4jp35hyh2ffeaj9wg9qfu3pe7
+    - &endo-yuanteng age1enz963d2u9dhqnt0a29ghdzkz9f7x9c6ck8h729mwvykpl50fqwqsg3l7c
 
 creation_rules:
   - path_regex: bots/auto-moderator/*
     age:
       - *deploy
       - *aster-void
+      - *endo-yuanteng
