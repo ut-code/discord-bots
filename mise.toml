@@ -1,0 +1,9 @@
+[tools]
+bun = "latest"
+node = "22"
+biome = "latest"
+sops = "latest"
+age = "latest"
+
+[env]
+SOPS_AGE_KEY_FILE = "{{ config_root }}/.age-key"

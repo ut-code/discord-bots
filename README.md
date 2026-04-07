@@ -11,6 +11,17 @@ Discord (など) で定期実行などされるBotのmonorepo。
 
 詳細は ./rollcron.yaml で。
 
+## 開発環境
+
+[mise](https://mise.jdx.dev/) でツール管理。`mise.toml` 参照。
+
+```bash
+mise doctor  # "activated: yes" を確認
+mise install # ツールをインストール (初回 or mise.toml 変更時)
+```
+
+`activated: no` の場合はシェルRCに `mise activate` を追加する。詳細は [mise docs](https://mise.jdx.dev/getting-started.html) を参照。
+
 ## Bot を追加する
 
 ### 1. `bots/` にフォルダを作る
@@ -23,7 +34,7 @@ Discord (など) で定期実行などされるBotのmonorepo。
 
 ```yaml
 my-bot:
-  schedule: "7pm"  # 下記参照
+  schedule: "7pm" # 下記参照
   working_dir: bots/my-bot
   run: ./run.sh
   log: ~/run/discord-bots/my-bot/log
@@ -51,8 +62,8 @@ schedule の書き方:
 2通りの方法がある:
 
 ```
-1. rollcron.yaml (env_file) → run.sh → program
-2. rollcron.yaml → run.sh → sops → program
+1. rollcron.yaml (env_file → .env) → run.sh → program
+2. rollcron.yaml → run.sh → (sops → sops.env) → program
 ```
 
 SOPS を使う場合は [docs/sops.md](docs/sops.md) を参照。
@@ -88,7 +99,6 @@ sops を使わない場合:
 ## コマンド
 
 ```bash
-eval "$(direnv export bash)" && COMMAND
 sops exec-env path/to/sops.env 'echo success!' # sops 鍵検証
 ssh USER@coolify.utcode.net "sudo -u deploy bash -c 'COMMAND'" # デプロイ先で操作
 ```
