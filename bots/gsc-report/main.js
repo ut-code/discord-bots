@@ -97,6 +97,7 @@ const channelIds = {
   "shortcut-game": "<#1364040140850462741>",
   "nikochan": "<#1359898697206468708>", // #sig-other-nikochan
   "my-code": "<#1388061105896816733>",
+  "navi": "<#1388060353958645840>",
 };
 
 (async () => {
