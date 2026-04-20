@@ -1,5 +1,6 @@
-#!/usr/bin/env bash
+#!/usr/bin/env -S mise exec -- bash
 set -euo pipefail
+cd "$(dirname "$0")"
 
 function bail() {
 	echo "$@"

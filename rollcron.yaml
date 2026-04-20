@@ -8,35 +8,46 @@ runner:
 jobs:
   auto-moderator:
     schedule: noon
-    run: ./run.sh
-    working_dir: bots/auto-moderator
+    run: bots/auto-moderator/run.sh
     log: ~/run/discord-bots/auto-moderator/log
 
   gsc-report:
     schedule: "7am every Sunday"
-    run: ./run.sh
-    working_dir: bots/gsc-report
+    run: bots/gsc-report/run.sh
     env_file: ~/run/discord-bots/gsc-report/env
     log: ~/run/discord-bots/gsc-report/log
 
   asakatsu-bot-ask:
     schedule: 7PM
-    run: ./run.sh ask
-    working_dir: bots/asakatsu-bot
+    run: bots/asakatsu-bot/run.sh ask
     env_file: ~/run/discord-bots/asakatsu-bot/env
     log: ~/run/discord-bots/asakatsu-bot/log
 
   asakatsu-bot-check:
     schedule: 8AM
-    working_dir: bots/asakatsu-bot
-    run: ./run.sh check
+    run: bots/asakatsu-bot/run.sh check
     env_file: ~/run/discord-bots/asakatsu-bot/env
     log: ~/run/discord-bots/asakatsu-bot/log
 
+<<<<<<< Updated upstream
   # joji-bot:
   #   schedule: "7pm"
   #   working_dir: bots/joji-bot
   #   run: ./run.sh
   #   env_file: ~/run/discord-bots/joji-bot/env
   #   log: ~/run/discord-bots/joji-bot/log
+||||||| Stash base
+  joji-bot:
+    schedule: "7pm"
+    working_dir: bots/joji-bot
+    run: ./run.sh
+    env_file: ~/run/discord-bots/joji-bot/env
+    log: ~/run/discord-bots/joji-bot/log
+=======
+  joji-bot:
+    schedule: "7pm"
+    run: bots/joji-bot/run.sh
+    env_file: ~/run/discord-bots/joji-bot/env
+    log: ~/run/discord-bots/joji-bot/log
+>>>>>>> Stashed changes
 

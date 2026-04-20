@@ -30,13 +30,25 @@ mise install # ツールをインストール (初回 or mise.toml 変更時)
 
 ### 3. `run.sh` を作る
 
+shebang は `#!/usr/bin/env -S mise exec -- bash` にする。mise がランタイム (bun, node 等) を解決する。
+スクリプト先頭で `cd "$(dirname "$0")"` して自分のディレクトリに移動する。
+
 ### 4. `rollcron.yaml` に追加
 
 ```yaml
 my-bot:
+<<<<<<< Updated upstream
   schedule: "7pm" # 下記参照
   working_dir: bots/my-bot
   run: ./run.sh
+||||||| Stash base
+  schedule: "7pm"  # 下記参照
+  working_dir: bots/my-bot
+  run: ./run.sh
+=======
+  schedule: "7pm"  # 下記参照
+  run: bots/my-bot/run.sh
+>>>>>>> Stashed changes
   log: ~/run/discord-bots/my-bot/log
   # build: ./build.sh  # コンパイルが必要な場合
   # env_file: ~/run/discord-bots/my-bot/env  # 環境変数が必要な場合
@@ -99,6 +111,12 @@ sops を使わない場合:
 ## コマンド
 
 ```bash
+<<<<<<< Updated upstream
+||||||| Stash base
+eval "$(direnv export bash)" && COMMAND
+=======
+mise exec -- COMMAND
+>>>>>>> Stashed changes
 sops exec-env path/to/sops.env 'echo success!' # sops 鍵検証
 ssh USER@coolify.utcode.net "sudo -u deploy bash -c 'COMMAND'" # デプロイ先で操作
 ```
