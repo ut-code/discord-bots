@@ -1,6 +1,8 @@
 runner:
   timezone: Asia/Tokyo
   env_file: ~/run/discord-bots/runner.env
+  env:
+    MISE_TRUSTED_CONFIG_PATHS: ~/.cache/rollcron
   webhook:
     - type: discord
       url: $DISCORD_WEBHOOK_URL
