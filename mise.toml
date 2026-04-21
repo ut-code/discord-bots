@@ -1,3 +1,6 @@
+[env]
+"_".source = "scripts/prepare-sops.sh"
+
 [tools]
 bun = "1"
 node = "24"
