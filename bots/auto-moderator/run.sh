@@ -1,7 +1,7 @@
 #!/usr/bin/env -S mise exec -- bash
 set -euo pipefail
 cd "$(dirname "$0")"
-source ../../scripts/sops-env.sh
+source ../../scripts/prepare-sops.sh
 
 bun install --frozen-lockfile
 sops exec-env sops.env 'bun start'
